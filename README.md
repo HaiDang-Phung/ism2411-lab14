@@ -3,4 +3,4 @@
 **Name:** Hai Dang Phung
 
 ## Command to run
-    python3 clean.py
+cd ism2411-lab14 && python3 clean.py
