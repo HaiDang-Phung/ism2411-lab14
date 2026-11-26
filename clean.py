@@ -26,3 +26,16 @@ df["quantity_sold"] = df["quantity_sold"].fillna(df["quantity_sold"].mean())
 df = df.dropna(subset=["order_id", "order_date"])
 print("Shape after:", df.shape)
 print("Missing values after cleaning:\n", df.isnull().sum())
+# EXERCISE 4: Fix types
+print("\n--- EXERCISE 4: FIX TYPES ---")
+df["order_date"] = pd.to_datetime(df["order_date"], errors="coerce")
+print("Dates converted to NaT:", df["order_date"].isnull().sum())
+df["unit_price"] = (
+    df["unit_price"]
+    .str.replace("$", "", regex=False)
+    .str.replace(",", "", regex=False)
+    .astype(float)
+)
+df["quantity_sold"] = df["quantity_sold"].astype(int)
+df["revenue"] = (df["unit_price"] * df["quantity_sold"]).round(2)
+print("\nUpdated dtypes:\n", df.dtypes)
