@@ -57,3 +57,12 @@ Suspicious Statistics & Business Explanations:
 # Drop rows where quantity_sold == 9999 because it is an artificial placeholder that distorts sales metrics, while keeping negative revenues as legitimate customer returns.
 df = df[df["quantity_sold"] != 9999]
 print("Shape after dropping quantity_sold == 9999:", df.shape)
+# EXERCISE 7: Save
+print("\n--- EXERCISE 7: SAVE ---")
+df.to_csv("data/clean_sales.csv", index=False)
+df_check_raw = pd.read_csv("data/clean_sales.csv")
+print("\nInfo after standard read_csv:")
+print(df_check_raw.info())
+df_check_parsed = pd.read_csv("data/clean_sales.csv", parse_dates=["order_date"])
+print("\nInfo after read_csv with parse_dates=['order_date']:")
+print(df_check_parsed.info())
