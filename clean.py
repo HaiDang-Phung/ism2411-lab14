@@ -46,3 +46,14 @@ print("Duplicate rows found:", duplicate_count)
 if duplicate_count > 0:
     df = df.drop_duplicates()
 print("Shape after removing duplicates:", df.shape)
+# EXERCISE 6: Describe
+print("\n--- EXERCISE 6: DESCRIBE ---")
+print(df.describe())
+"""
+Suspicious Statistics & Business Explanations:
+1. Extreme maximum in quantity_sold (9,999) and revenue: A single order of 9,999 units pulls the mean far above the median (50%). This is a manual data-entry placeholder or test record rather than a genuine retail purchase.
+2. Negative minimums in unit_price and revenue: Negative values represent customer product returns/refunds (money refunded back to customers), which are valid accounting events and must be kept.
+"""
+# Drop rows where quantity_sold == 9999 because it is an artificial placeholder that distorts sales metrics, while keeping negative revenues as legitimate customer returns.
+df = df[df["quantity_sold"] != 9999]
+print("Shape after dropping quantity_sold == 9999:", df.shape)
