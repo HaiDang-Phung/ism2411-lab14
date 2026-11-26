@@ -1,3 +1,15 @@
+"""
+## Self-Assessment Reflection
+
+1. Which of the three cleaning decisions — drop, fill, or flag — feels most ambiguous to you? What additional information would you want before making that call on real data?
+Filling (imputation) feels the most ambiguous because replacing missing numbers with a column average introduces synthetic values that can distort variance or hide underlying patterns. Before making that call on real data, I would want to know why the values are missing (e.g., system logging errors vs. unrecorded walk-in sales) and whether missingness correlates with specific product categories or regions.
+
+2. Look at your comments. If someone who didn't know the dataset read your script, would they understand why you made each decision? Revise any comment that only says what you did without saying why.
+Yes. Every required decision comment explicitly states both the action taken and the business/analytical rationale behind it (such as preserving valid revenue rows when imputing minor missing quantities, removing untraceable orders without IDs/dates, keeping negative returns as valid financial outflows, and dropping placeholder quantities of 9,999).
+
+3. After running describe(), what is the most important thing you noticed about this dataset that you did not expect when you first loaded it?
+The most unexpected finding was the presence of extreme placeholder values (quantity_sold = 9,999) alongside negative unit prices and revenues representing product returns, which heavily skewed the raw mean and standard deviation compared to the median.
+"""
 import pandas as pd
 # EXERCISE 1: Inspect
 df = pd.read_csv("data/messy_sales.csv")
