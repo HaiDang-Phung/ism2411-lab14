@@ -11,3 +11,7 @@ Data Quality Issues Observed:
 3. Missing values exist across multiple columns: Customer ID has 362 missing (7.54%), Region has 111 missing (2.31%), Quantity Sold has 94 missing (1.96%), Order ID has 31 missing (0.65%), and Order Date has 25 missing (0.52%).
 4. Quantity Sold is stored as float64 due to missing NaN values, but should be integer (int64) once cleaned.
 """
+# EXERCISE 2: Standardize column names
+df.columns = df.columns.str.lower().str.replace(" ", "_")
+print("\n--- EXERCISE 2: UPDATED COLUMNS ---")
+print(df.columns.tolist())
