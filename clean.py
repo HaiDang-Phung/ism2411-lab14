@@ -39,3 +39,10 @@ df["unit_price"] = (
 df["quantity_sold"] = df["quantity_sold"].astype(int)
 df["revenue"] = (df["unit_price"] * df["quantity_sold"]).round(2)
 print("\nUpdated dtypes:\n", df.dtypes)
+# EXERCISE 5: Check duplicates
+print("\n--- EXERCISE 5: CHECK DUPLICATES ---")
+duplicate_count = df.duplicated().sum()
+print("Duplicate rows found:", duplicate_count)
+if duplicate_count > 0:
+    df = df.drop_duplicates()
+print("Shape after removing duplicates:", df.shape)
