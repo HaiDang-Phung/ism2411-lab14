@@ -15,3 +15,14 @@ Data Quality Issues Observed:
 df.columns = df.columns.str.lower().str.replace(" ", "_")
 print("\n--- EXERCISE 2: UPDATED COLUMNS ---")
 print(df.columns.tolist())
+# EXERCISE 3: Handle missing values
+print("\n--- EXERCISE 3: HANDLE MISSING VALUES ---")
+print("Shape before:", df.shape)
+# Fill missing values in numeric column 'quantity_sold' with the column mean
+# Why: Only 1.96% of rows are missing quantity, so imputing with the mean preserves valid sales records without distorting overall volume.
+df["quantity_sold"] = df["quantity_sold"].fillna(df["quantity_sold"].mean())
+# Drop rows missing essential identifiers ('order_id' or 'order_date')
+# Why: Transactions without a valid ID or date cannot be tracked or analyzed chronologically, so imputing them would create fabricated records.
+df = df.dropna(subset=["order_id", "order_date"])
+print("Shape after:", df.shape)
+print("Missing values after cleaning:\n", df.isnull().sum())
